@@ -1,0 +1,11 @@
+hu:
+  webhook: WebHook
+  notice_fail_create_webhook: Hiba történt a webhook létrehozása közben.
+  notice_successful_create_webhook: A webhook sikeresen létrejött.
+  notice_fail_update_webhook: Hiba történt a webhook módosítása közben.
+  notice_successful_update_webhook : A webhook sikeresen módosítva lett.
+  notice_fail_delete_webhook: Hiba történt a webhook törlése közben.
+  notice_successful_delete_webhook : A webhook sikeresen törlésre került.
+  label_webhook_url: URL
+  label_webhook_key: Kulcs
+  label_webhook_subprojects: Alprojektek
