@@ -5,10 +5,12 @@
 <span>
   <span><strong><%=l(:label_webhook_url)%></strong></span>
   <%= text_field_tag :url, webhook.url, :size => 80 %>
-  <span><strong><%=l(:label_webhook_key)%></strong></span>
+  <span><strong><%=l(:label_webhook_secret_key)%></strong></span>
   <%= password_field_tag :secret_key, webhook.secret_key, :size => 32 %>
   <span><strong><%=l(:label_webhook_subprojects)%></strong></span>
   <%= check_box_tag :subprojects, 1, webhook.subprojects %>
+  <span><strong><%=l(:label_webhook_hmac_alg)%></strong></span>
+  <%= select_tag :hmac_alg, options_for_select(['sha256', 'sha1'], webhook.hmac_alg) %>
   <%= submit_tag l(:button_update) %>
 </span>
 <% end %>
@@ -23,10 +25,12 @@
 <span>
   <span><strong><%=l(:label_webhook_url)%></strong></span>
   <%= text_field_tag :url, '', :size => 80 %>
-  <span><strong><%=l(:label_webhook_key)%></strong></span>
+  <span><strong><%=l(:label_webhook_secret_key)%></strong></span>
   <%= password_field_tag :secret_key, '', :size => 32 %>
   <span><strong><%=l(:label_webhook_subprojects)%></strong></span>
   <%= check_box_tag :subprojects, 1, false %>
+  <span><strong><%=l(:label_webhook_hmac_alg)%></strong></span>
+  <%= select_tag :hmac_alg, options_for_select(['sha256', 'sha1'], 'sha256') %>
   <%= submit_tag l(:button_add) %>
 </span>
 </div>

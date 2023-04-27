@@ -73,12 +73,10 @@ module RedmineWebhook
 
     def journal_to_json(issue, journal, controller)
       {
-        :payload => {
-          :action => 'updated',
-          :issue => RedmineWebhook::IssueWrapper.new(issue).to_hash,
-          :journal => RedmineWebhook::JournalWrapper.new(journal).to_hash,
-          :url => controller.nil? ? 'not yet implemented' : controller.issue_url(issue)
-        }
+        :action => 'updated',
+        :issue => RedmineWebhook::IssueWrapper.new(issue).to_hash,
+        :journal => RedmineWebhook::JournalWrapper.new(journal).to_hash,
+        :url => controller.nil? ? 'not yet implemented' : controller.issue_url(issue)
       }.to_json
     end
 
@@ -87,16 +85,18 @@ module RedmineWebhook
         webhooks.each do |webhook|
           begin
             # Sign payload
+            hmac_alg = webhook.hmac_alg
+            hmac_alg = "sha256" unless hmac_alg
             key = webhook.secret_key
-            # TODO: Allow configuration of algorithm in redmine configuration
-            hmac_alg = "sha1"
-            mac = OpenSSL::HMAC.hexdigest(hmac_alg, key, request_body)
+            if key
+              Rails.logger.error 'The super secret key is: %p' % key
+              mac = OpenSSL::HMAC.hexdigest(hmac_alg, key, request_body)
+            end
             Faraday.post do |req|
               req.url webhook.url
-              req.headers['Authorization'] = "Bearer #{webhook.key}" if webhook.key
               req.headers['Content-Type'] = 'application/json'
-              req.headers['X-RedmineWebhook-HMAC-Alg'] = hmac_alg
-              req.headers['X-RedmineWebhook-HMAC-Signature'] = mac
+              req.headers['Authorization'] = "hmac-#{hmac_alg} #{mac}" if key && mac
+              req.headers['X-Authorization-HMAC-Alg'] = "#{hmac_alg}" if key && mac
               req.body = request_body
             end
           rescue => e

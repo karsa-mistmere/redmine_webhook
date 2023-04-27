@@ -23,6 +23,7 @@ class WebhookSettingsController < ApplicationController
     webhook = Webhook.where(:project_id => @project.id).where(:id => id).first
     webhook.url = params[:url]
     webhook.secret_key = params[:secret_key]
+    webhook.hmac_alg = params[:hmac_alg]
     webhook.subprojects = params[:subprojects] ? true : false
     if webhook.url.blank? ? webhook.destroy : webhook.save
       flash[:notice] = l(:notice_successful_update_webhook)

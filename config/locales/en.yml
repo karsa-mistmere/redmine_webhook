@@ -8,5 +8,6 @@ en:
   notice_fail_delete_webhook: Webhook delete failed.
   notice_successful_delete_webhook : Webhook deleted successfully.
   label_webhook_url: URL
-  label_webhook_key: Key
+  label_webhook_secret_key: Key
+  label_webhook_hmac_alg: HMAC alg
   label_webhook_subprojects: Subprojects
