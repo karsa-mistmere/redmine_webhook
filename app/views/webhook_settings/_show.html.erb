@@ -6,7 +6,7 @@
   <span><strong><%=l(:label_webhook_url)%></strong></span>
   <%= text_field_tag :url, webhook.url, :size => 80 %>
   <span><strong><%=l(:label_webhook_key)%></strong></span>
-  <%= text_field_tag :key, webhook.key, :size => 32 %>
+  <%= password_field_tag :secret_key, webhook.secret_key, :size => 32 %>
   <span><strong><%=l(:label_webhook_subprojects)%></strong></span>
   <%= check_box_tag :subprojects, 1, webhook.subprojects %>
   <%= submit_tag l(:button_update) %>
@@ -24,7 +24,7 @@
   <span><strong><%=l(:label_webhook_url)%></strong></span>
   <%= text_field_tag :url, '', :size => 80 %>
   <span><strong><%=l(:label_webhook_key)%></strong></span>
-  <%= text_field_tag :key, '', :size => 32 %>
+  <%= password_field_tag :secret_key, '', :size => 32 %>
   <span><strong><%=l(:label_webhook_subprojects)%></strong></span>
   <%= check_box_tag :subprojects, 1, false %>
   <%= submit_tag l(:button_add) %>
