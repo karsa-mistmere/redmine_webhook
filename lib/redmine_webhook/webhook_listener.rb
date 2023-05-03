@@ -63,11 +63,9 @@ module RedmineWebhook
     private
     def issue_to_json(issue, controller)
       {
-        :payload => {
-          :action => 'opened',
-          :issue => RedmineWebhook::IssueWrapper.new(issue).to_hash,
-          :url => controller.issue_url(issue)
-        }
+        :action => 'opened',
+        :issue => RedmineWebhook::IssueWrapper.new(issue).to_hash,
+        :url => controller.issue_url(issue)
       }.to_json
     end
 
