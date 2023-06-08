@@ -93,7 +93,7 @@ module RedmineWebhook
               req.url webhook.url
               req.headers['Content-Type'] = 'application/json'
               req.headers['Authorization'] = "hmac-#{hmac_alg} #{mac}" if key && mac
-              req.headers['X-Authorization-HMAC-Alg'] = "#{hmac_alg}" if key && mac
+              req.headers['Authorization-HMAC-Alg'] = "#{hmac_alg}" if key && mac
               req.body = request_body
             end
           rescue => e
