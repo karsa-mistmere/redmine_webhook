@@ -87,7 +87,6 @@ module RedmineWebhook
             hmac_alg = "sha256" unless hmac_alg
             key = webhook.secret_key
             if key
-              Rails.logger.error 'The super secret key is: %p' % key
               mac = OpenSSL::HMAC.hexdigest(hmac_alg, key, request_body)
             end
             Faraday.post do |req|
