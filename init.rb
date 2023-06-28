@@ -3,7 +3,7 @@ if Rails.try(:autoloaders).try(:zeitwerk_enabled?)
   RedmineWebhook::ProjectsHelperPatch
   RedmineWebhook::WebhookListener
 else
-  require "redmine_webhook"
+  require File.dirname(__FILE__) + '/lib/redmine_webhook.rb'
 end
 
 Redmine::Plugin.register :redmine_webhook do
