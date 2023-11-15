@@ -21,7 +21,7 @@ module RedmineWebhook
         :is_private => @issue.is_private,
         :lock_version => @issue.lock_version,
         :custom_field_values => @issue.custom_field_values.collect { |value| RedmineWebhook::CustomFieldValueWrapper.new(value).to_hash },
-        :category => RedmineWebhook::CategoryWrapper.new(@issue.category).to_hash,
+        :category => @issue.category ? RedmineWebhook::CategoryWrapper.new(@issue.category).to_hash : nil,
         :project => RedmineWebhook::ProjectWrapper.new(@issue.project).to_hash,
         :status => RedmineWebhook::StatusWrapper.new(@issue.status).to_hash,
         :tracker => RedmineWebhook::TrackerWrapper.new(@issue.tracker).to_hash,
