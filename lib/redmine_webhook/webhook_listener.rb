@@ -73,7 +73,7 @@ module RedmineWebhook
       {
         :action => 'updated',
         :issue => RedmineWebhook::IssueWrapper.new(issue).to_hash,
-        :journal => RedmineWebhook::JournalWrapper.new(journal).to_hash,
+        :journal => journal.nil? ? nil : RedmineWebhook::JournalWrapper.new(journal).to_hash,
         :url => controller.nil? ? 'not yet implemented' : controller.issue_url(issue)
       }.to_json
     end
