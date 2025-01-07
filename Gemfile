@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
 
-gem 'faraday'
+gem 'faraday', '~> 0.8.8'
